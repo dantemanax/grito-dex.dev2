@@ -3,35 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grito-Dex Sinnoh Grid</title>
+    <title>Grito-Dex v8.1 - Sinnoh Edition</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="pokedex-frame">
-        <header class="pokedex-header">
-            <div class="main-sensor"></div>
-            <div class="status-lights">
-                <span class="light red"></span>
-                <span class="light yellow"></span>
-                <span class="light green"></span>
+    <div class="pokedex-case">
+        <div class="top-section">
+            <header class="pokedex-header">
+                <div class="big-blue-light"></div>
+                <div class="mini-lights">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+            </header>
+
+            <nav class="pokedex-tabs">
+                <button class="tab-btn">JUGAR</button>
+                <button class="tab-btn active">DEX</button>
+            </nav>
+
+            <main class="dex-screen">
+                <div class="stats-header">VISTOS: <span id="vistos-count">0</span></div>
+                <div id="pokemon-grid" class="dex-grid"></div>
+            </main>
+        </div>
+
+        <div class="controls-section">
+            <div class="action-buttons">
+                <div class="btn-a">A</div>
+                <div class="btn-b">B</div>
             </div>
-            <h1 class="title">GRITO-DEX</h1>
-        </header>
-
-        <nav class="pokedex-nav">
-            <button class="nav-btn">JUGAR</button>
-            <button class="nav-btn active">DEX</button>
-        </nav>
-
-        <main class="dex-screen">
-            <div class="stats-bar">
-                VISTOS: <span id="vistos-count">0</span>
+            
+            <div class="d-pad-container">
+                <div class="d-pad">
+                    <div class="up"></div>
+                    <div class="right"></div>
+                    <div class="down"></div>
+                    <div class="left"></div>
+                    <div class="center"></div>
+                </div>
             </div>
-
-            <div id="pokemon-grid" class="dex-grid"></div>
-        </main>
+        </div>
     </div>
 
     <script src="script.js"></script>
