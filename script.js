@@ -12,16 +12,16 @@ const pokemonData = [
 const gridContainer = document.getElementById('pokemon-grid');
 const vistosCount = document.getElementById('vistos-count');
 
-function renderGrid() {
+function initDex() {
     vistosCount.innerText = pokemonData.length;
     
     gridContainer.innerHTML = pokemonData.map(pokemon => `
-        <button class="pokemon-btn" onclick="alert('¡Grito de ${pokemon.name}!')">
+        <div class="pokemon-card-btn" onclick="console.log('Seleccionado: ${pokemon.name}')">
             <span class="pk-id">#${pokemon.id}</span>
             <img src="${pokemon.sprite}" alt="${pokemon.name}">
             <span class="pk-name">${pokemon.name}</span>
-        </button>
+        </div>
     `).join('');
 }
 
-document.addEventListener('DOMContentLoaded', renderGrid);
+document.addEventListener('DOMContentLoaded', initDex);
