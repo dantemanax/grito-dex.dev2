@@ -1,0 +1,166 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #b3e5fc; /* Fondo azul claro del exterior */
+    font-family: 'VT323', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* MARCO DE LA POKEDEX */
+.pokedex-frame {
+    width: 380px;
+    background-color: #b3e5fc;
+    border: 8px solid #81d4fa;
+    border-radius: 25px;
+    padding: 15px;
+    box-shadow: 0 10px 0 #4fc3f7;
+}
+
+/* HEADER Y LUCES */
+.pokedex-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.main-sensor {
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, #4fc3f7, #0288d1);
+    border: 4px solid white;
+    border-radius: 50%;
+}
+
+.status-lights {
+    display: flex;
+    gap: 8px;
+    padding-top: 5px;
+}
+
+.light {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #333;
+}
+.red { background: #ff5252; }
+.yellow { background: #ffd740; }
+.green { background: #69f0ae; }
+
+.title {
+    flex-grow: 1;
+    text-align: right;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    color: #333;
+}
+
+/* BOTONES SUPERIORES */
+.pokedex-nav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.nav-btn {
+    flex: 1;
+    padding: 10px;
+    background: #424242;
+    color: white;
+    border: none;
+    font-family: 'VT323';
+    font-size: 1.4rem;
+    cursor: pointer;
+    border-bottom: 4px solid #212121;
+}
+
+.nav-btn.active {
+    background: #757575;
+    border-bottom: 4px solid #424242;
+}
+
+/* PANTALLA PRINCIPAL (GEN 4 STYLE) */
+.dex-screen {
+    background-color: #9da38a; /* Verde oliva base */
+    
+    /* PATRÓN SINNOH: Puntos blanco-grisáceos */
+    background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1.5px, transparent 1.5px);
+    background-size: 10px 10px;
+    
+    border: 6px solid #5d6153;
+    border-radius: 10px;
+    height: 450px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.stats-bar {
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding-bottom: 5px;
+    border-bottom: 3px solid #5d6153;
+    margin-bottom: 15px;
+    color: #2d2f28;
+}
+
+/* LISTA DE POKEMON (SOLUCIÓN AL ERROR DE ALINEACIÓN) */
+.dex-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pokemon-card {
+    display: grid;
+    /* Columna 1: Sprite (80px), Columna 2: Info (el resto) */
+    grid-template-columns: 80px 1fr; 
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.sprite-container {
+    display: flex;
+    justify-content: center;
+}
+
+.sprite-container img {
+    width: 70px;
+    image-rendering: pixelated; /* Mantiene el look retro */
+}
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.pk-number {
+    font-size: 1rem;
+    color: #444;
+    font-weight: bold;
+}
+
+.pk-name {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: #000;
+}
+
+/* Estilo del Scrollbar */
+.dex-screen::-webkit-scrollbar {
+    width: 8px;
+}
+.dex-screen::-webkit-scrollbar-thumb {
+    background: #5d6153;
+    border-radius: 4px;
+}
