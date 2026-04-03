@@ -1,4 +1,3 @@
-// Datos de ejemplo basados en tu imagen
 const pokemonData = [
     { id: 5, name: "Charmeleon", sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png" },
     { id: 8, name: "Wartortle", sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png" },
@@ -6,28 +5,23 @@ const pokemonData = [
     { id: 11, name: "Metapod", sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/11.png" },
     { id: 12, name: "Butterfree", sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png" },
     { id: 17, name: "Pidgeotto", sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/17.png" },
-    { id: 26, name: "Raichu", sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png" }
+    { id: 26, name: "Raichu", sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png" },
+    { id: 25, name: "Pikachu", sprite: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" }
 ];
 
-const pokemonListContainer = document.getElementById('pokemon-list');
+const gridContainer = document.getElementById('pokemon-grid');
 const vistosCount = document.getElementById('vistos-count');
 
-// Función para renderizar la lista
-function renderDex() {
+function renderGrid() {
     vistosCount.innerText = pokemonData.length;
     
-    pokemonListContainer.innerHTML = pokemonData.map(pokemon => `
-        <div class="pokemon-card">
-            <div class="sprite-container">
-                <img src="${pokemon.sprite}" alt="${pokemon.name}">
-            </div>
-            <div class="info-container">
-                <span class="pk-number">#${pokemon.id}</span>
-                <span class="pk-name">${pokemon.name}</span>
-            </div>
-        </div>
+    gridContainer.innerHTML = pokemonData.map(pokemon => `
+        <button class="pokemon-btn" onclick="alert('¡Grito de ${pokemon.name}!')">
+            <span class="pk-id">#${pokemon.id}</span>
+            <img src="${pokemon.sprite}" alt="${pokemon.name}">
+            <span class="pk-name">${pokemon.name}</span>
+        </button>
     `).join('');
 }
 
-// Inicializar la carga
-document.addEventListener('DOMContentLoaded', renderDex);
+document.addEventListener('DOMContentLoaded', renderGrid);
