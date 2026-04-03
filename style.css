@@ -1,11 +1,13 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+:root {
+    --poke-red: #dc0a2d;
+    --sinnoh-bg: #9da38a;
+    --dpad-color: #333;
 }
 
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-    background-color: #b3e5fc;
+    background-color: #222;
     font-family: 'VT323', monospace;
     display: flex;
     justify-content: center;
@@ -13,142 +15,120 @@ body {
     min-height: 100vh;
 }
 
-.pokedex-frame {
+.pokedex-case {
     width: 380px;
-    background-color: #b3e5fc;
-    border: 8px solid #81d4fa;
-    border-radius: 25px;
-    padding: 15px;
-    box-shadow: 0 10px 0 #4fc3f7;
+    background-color: var(--poke-red);
+    border-radius: 15px 15px 50px 15px;
+    padding: 20px;
+    box-shadow: inset -10px -10px 0 rgba(0,0,0,0.2), 10px 10px 20px rgba(0,0,0,0.5);
 }
 
-.pokedex-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.main-sensor {
-    width: 50px;
-    height: 50px;
-    background: radial-gradient(circle, #4fc3f7, #0288d1);
-    border: 4px solid white;
-    border-radius: 50%;
-}
-
-.status-lights {
-    display: flex;
-    gap: 8px;
-    padding-top: 5px;
-}
-
-.light {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 2px solid #333;
-}
-.red { background: #ff5252; }
-.yellow { background: #ffd740; }
-.green { background: #69f0ae; }
-
-.title {
-    flex-grow: 1;
-    text-align: right;
-    font-size: 2.2rem;
-    color: #333;
-}
-
-.pokedex-nav {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.nav-btn {
-    flex: 1;
-    padding: 10px;
-    background: #424242;
-    color: white;
-    border: none;
-    font-family: 'VT323';
-    font-size: 1.4rem;
-    cursor: pointer;
-}
-
-.nav-btn.active { background: #757575; }
-
-/* PANTALLA CON PATRÓN SINNOH */
+/* PANTALLA Y PATRÓN */
 .dex-screen {
-    background-color: #9da38a;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.25) 1.5px, transparent 1.5px);
+    background-color: var(--sinnoh-bg);
+    /* Patrón blanco-grisáceo de la Gen 4 */
+    background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1.5px, transparent 1.5px);
     background-size: 10px 10px;
-    border: 6px solid #5d6153;
+    
+    border: 15px solid #dedede;
     border-radius: 10px;
-    height: 450px;
+    height: 400px;
     overflow-y: auto;
-    padding: 15px;
+    padding: 10px;
 }
 
-.stats-bar {
+.stats-header {
     font-size: 1.8rem;
-    margin-bottom: 15px;
     color: #2d2f28;
-    text-align: center;
     border-bottom: 2px solid #5d6153;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
-/* --- CONFIGURACIÓN DE LAS DOS COLUMNAS --- */
+/* CUADRÍCULA 2 COLUMNAS */
 .dex-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Crea 2 columnas iguales */
-    gap: 15px; /* Espacio entre botones */
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
 }
 
-.pokemon-btn {
-    background: rgba(255, 255, 255, 0.15);
-    border: 3px solid #5d6153;
-    border-radius: 10px;
-    aspect-ratio: 1 / 1; /* Esto lo hace perfectamente cuadrado */
+.pokemon-card-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid #5d6153;
+    border-radius: 8px;
+    aspect-ratio: 1/1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: transform 0.1s, background 0.2s;
-    padding: 5px;
+    position: relative;
 }
 
-.pokemon-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
-}
-
-.pokemon-btn:active {
-    transform: scale(0.95);
-}
-
-.pokemon-btn img {
+.pokemon-card-btn img {
     width: 80%;
     image-rendering: pixelated;
 }
 
-.pokemon-btn .pk-id {
-    font-size: 0.9rem;
-    color: #333;
+.pk-id {
     position: absolute;
-    top: 5px;
-    left: 8px;
+    top: 2px;
+    left: 5px;
+    font-size: 0.8rem;
 }
 
-.pokemon-btn .pk-name {
-    font-size: 1.1rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-top: 5px;
+/* SECCIÓN DE CONTROLES (Cruz a la derecha) */
+.controls-section {
+    display: flex;
+    justify-content: space-between; /* Empuja los elementos a los extremos */
+    align-items: center;
+    margin-top: 25px;
+    padding: 0 10px;
 }
 
-/* Scrollbar */
-.dex-screen::-webkit-scrollbar { width: 8px; }
-.dex-screen::-webkit-scrollbar-thumb { background: #5d6153; border-radius: 4px; }
+/* Botones A/B a la izquierda */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-a, .btn-b {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #333;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 0 #000;
+}
+
+/* D-PAD A LA DERECHA */
+.d-pad {
+    position: relative;
+    width: 90px;
+    height: 90px;
+}
+
+.d-pad div {
+    position: absolute;
+    background: var(--dpad-color);
+    border: 2px solid #111;
+}
+
+.up { width: 30px; height: 35px; top: 0; left: 30px; border-radius: 5px 5px 0 0; }
+.down { width: 30px; height: 35px; bottom: 0; left: 30px; border-radius: 0 0 5px 5px; }
+.left { width: 35px; height: 30px; top: 30px; left: 0; border-radius: 5px 0 0 5px; }
+.right { width: 35px; height: 30px; top: 30px; right: 0; border-radius: 0 5px 5px 0; }
+.center { width: 30px; height: 30px; top: 30px; left: 30px; border: none !important; }
+
+/* Cabecera decorativa */
+.big-blue-light {
+    width: 50px; height: 50px;
+    background: radial-gradient(circle, #4fc3f7, #0288d1);
+    border: 4px solid white; border-radius: 50%;
+}
+.mini-lights { display: flex; gap: 5px; margin-top: 5px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid #333; }
+.red { background: #ff5252; } .yellow { background: #ffd740; } .green { background: #69f0ae; }
