@@ -3,64 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grito-Dex Sinnoh Edition</title>
+    <title>Grito-Dex Pro | v8.3 Final</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-    <div class="pokedex-frame">
-        <header class="pokedex-header">
-            <div class="sensor-blue"></div>
-            <div class="lights">
-                <span class="light red"></span>
-                <span class="light yellow"></span>
-                <span class="light green"></span>
+<body id="app-body" class="theme-1">
+    <div class="pokedex-case">
+        <div class="top-header">
+            <div class="blue-eye" id="status-light"></div>
+            <div class="light-dots">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
             </div>
-            <h1>GRITO-DEX</h1>
-        </header>
+        </div>
 
-        <nav class="pokedex-tabs">
-            <button class="tab-btn">JUGAR</button>
-            <button class="tab-btn active">DEX</button>
-        </nav>
+        <h1 class="main-title">GRITO-DEX</h1>
+        
+        <div class="nav-tabs">
+            <button id="btn-game" class="active">JUGAR</button>
+            <button id="btn-view-gritodex">DEX</button>
+        </div>
 
-        <main class="dex-screen">
-            <div class="counter">VISTOS: 62</div>
+        <div id="game-view">
+            <div class="controls-top">
+                <select id="gen-select" class="retro-select">
+                    <option value="1">GEN 1 (KANTO)</option>
+                    <option value="2">GEN 2 (JOHTO)</option>
+                    <option value="3">GEN 3 (HOENN)</option>
+                    <option value="4">GEN 4 (SINNOH)</option>
+                    <option value="5">GEN 5 (UNOVA)</option>
+                    <option value="all">TODAS (1-5)</option>
+                </select>
+                <button id="play-btn">REPRODUCIR GRITO</button>
+            </div>
 
-            <div class="dex-list">
-                <div class="dex-item">
-                    <div class="sprite-box">
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png" alt="Charmeleon">
-                    </div>
-                    <div class="info-box">
-                        <span class="pk-number">#5</span>
-                        <span class="pk-name">CHARMELEON</span>
-                    </div>
+            <div class="pokedex-screen">
+                <div id="main-screen">
+                    <div id="options-container" class="options-list"></div>
                 </div>
+            </div>
 
-                <div class="dex-item">
-                    <div class="sprite-box">
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png" alt="Wartortle">
-                    </div>
-                    <div class="info-box">
-                        <span class="pk-number">#8</span>
-                        <span class="pk-name">WARTORTLE</span>
-                    </div>
-                </div>
+            <div id="feedback" class="hidden">
+                <p id="message"></p>
+                <button id="next-btn">SIGUIENTE</button>
+            </div>
+        </div>
 
-                <div class="dex-item">
-                    <div class="sprite-box">
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png" alt="Raichu">
-                    </div>
-                    <div class="info-box">
-                        <span class="pk-number">#26</span>
-                        <span class="pk-name">RAICHU</span>
-                    </div>
+        <div id="gritodex-view" class="hidden">
+            <div class="pokedex-screen">
+                <div id="gritodex-screen">
+                    <h3 class="dex-counter">VISTOS: <span id="count">0</span></h3>
+                    <div id="gritodex-list"></div>
                 </div>
-                
-                </div>
-        </main>
+            </div>
+        </div>
+
+        <div class="pokedex-footer">
+            <div class="vent-lines">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="d-pad"></div>
+        </div>
     </div>
 
+    <audio id="snd-success" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
+    <audio id="snd-error" src="https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3"></audio>
+
+    <script src="script.js"></script>
 </body>
 </html>
