@@ -1,134 +1,156 @@
+/* Importar una fuente pixel art para el toque retro */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 :root {
-    --poke-red: #dc0a2d;
-    --sinnoh-bg: #9da38a;
-    --dpad-color: #333;
+    --sinnoh-green: #9da38a;
+    --border-dark: #333;
+    --bg-light: #ccefff;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
 body {
-    background-color: #222;
+    background-color: var(--bg-light);
     font-family: 'VT323', monospace;
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
-.pokedex-case {
-    width: 380px;
-    background-color: var(--poke-red);
-    border-radius: 15px 15px 50px 15px;
     padding: 20px;
-    box-shadow: inset -10px -10px 0 rgba(0,0,0,0.2), 10px 10px 20px rgba(0,0,0,0.5);
 }
 
-/* PANTALLA Y PATRÓN */
+/* Marco exterior de la Pokedex */
+.pokedex-frame {
+    width: 350px;
+    background-color: var(--bg-light);
+    border: 6px solid #80dfff;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 10px 0 #66b3cc;
+}
+
+/* Luces y Header */
+.pokedex-header {
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.sensor-blue {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, #85c1e9, #3498db);
+    border: 4px solid white;
+    border-radius: 50%;
+    margin-bottom: 5px;
+}
+
+.lights {
+    display: flex;
+    gap: 5px;
+    margin-left: 50px;
+    margin-top: -30px;
+}
+
+.light {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #333;
+}
+.red { background: #ff4d4d; }
+.yellow { background: #ffeb3b; }
+.green { background: #4caf50; }
+
+h1 {
+    font-size: 2rem;
+    margin-top: 10px;
+    letter-spacing: 2px;
+}
+
+/* Botones JUGAR / DEX */
+.pokedex-tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.tab-btn {
+    width: 48%;
+    background: #444;
+    color: white;
+    border: none;
+    padding: 8px;
+    font-family: 'VT323';
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background: #888;
+}
+
+/* --- LA PANTALLA (SINNOH STYLE) --- */
 .dex-screen {
-    background-color: var(--sinnoh-bg);
-    /* Patrón blanco-grisáceo de la Gen 4 */
-    background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1.5px, transparent 1.5px);
+    background-color: var(--sinnoh-green);
+    /* El patrón blanco grisáceo que pediste */
+    background-image: radial-gradient(rgba(255, 255, 255, 0.25) 1.5px, transparent 1.5px);
     background-size: 10px 10px;
     
-    border: 15px solid #dedede;
+    border: 5px solid #5a5e4d;
     border-radius: 10px;
-    height: 400px;
-    overflow-y: auto;
-    padding: 10px;
+    height: 500px;
+    padding: 15px;
+    overflow-y: scroll;
 }
 
-.stats-header {
+.counter {
     font-size: 1.8rem;
-    color: #2d2f28;
-    border-bottom: 2px solid #5d6153;
-    margin-bottom: 15px;
-    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #5a5e4d;
 }
 
-/* CUADRÍCULA 2 COLUMNAS */
-.dex-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-
-.pokemon-card-btn {
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid #5d6153;
-    border-radius: 8px;
-    aspect-ratio: 1/1;
+/* --- SOLUCIÓN AL PROBLEMA DE ALINEACIÓN --- */
+.dex-list {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    position: relative;
-}
-
-.pokemon-card-btn img {
-    width: 80%;
-    image-rendering: pixelated;
-}
-
-.pk-id {
-    position: absolute;
-    top: 2px;
-    left: 5px;
-    font-size: 0.8rem;
-}
-
-/* SECCIÓN DE CONTROLES (Cruz a la derecha) */
-.controls-section {
-    display: flex;
-    justify-content: space-between; /* Empuja los elementos a los extremos */
-    align-items: center;
-    margin-top: 25px;
-    padding: 0 10px;
-}
-
-/* Botones A/B a la izquierda */
-.action-buttons {
-    display: flex;
     gap: 15px;
 }
 
-.btn-a, .btn-b {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: #333;
-    color: white;
-    display: flex;
-    justify-content: center;
+.dex-item {
+    display: grid;
+    grid-template-columns: 80px 1fr; /* Columna fija para el sprite */
     align-items: center;
-    box-shadow: 0 4px 0 #000;
+    background: rgba(0, 0, 0, 0.05); /* Sombra sutil para cada fila */
+    padding: 5px;
+    border-radius: 5px;
 }
 
-/* D-PAD A LA DERECHA */
-.d-pad {
-    position: relative;
-    width: 90px;
-    height: 90px;
+.sprite-box img {
+    width: 70px;
+    image-rendering: pixelated; /* Mantiene el estilo pixel art */
 }
 
-.d-pad div {
-    position: absolute;
-    background: var(--dpad-color);
-    border: 2px solid #111;
+.info-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
 }
 
-.up { width: 30px; height: 35px; top: 0; left: 30px; border-radius: 5px 5px 0 0; }
-.down { width: 30px; height: 35px; bottom: 0; left: 30px; border-radius: 0 0 5px 5px; }
-.left { width: 35px; height: 30px; top: 30px; left: 0; border-radius: 5px 0 0 5px; }
-.right { width: 35px; height: 30px; top: 30px; right: 0; border-radius: 0 5px 5px 0; }
-.center { width: 30px; height: 30px; top: 30px; left: 30px; border: none !important; }
-
-/* Cabecera decorativa */
-.big-blue-light {
-    width: 50px; height: 50px;
-    background: radial-gradient(circle, #4fc3f7, #0288d1);
-    border: 4px solid white; border-radius: 50%;
+.pk-number {
+    font-size: 0.9rem;
+    color: #444;
 }
-.mini-lights { display: flex; gap: 5px; margin-top: 5px; }
-.dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid #333; }
-.red { background: #ff5252; } .yellow { background: #ffd740; } .green { background: #69f0ae; }
+
+.pk-name {
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Personalización del Scrollbar */
+.dex-screen::-webkit-scrollbar {
+    width: 10px;
+}
+.dex-screen::-webkit-scrollbar-thumb {
+    background: #5a5e4d;
+    border-radius: 5px;
+}
