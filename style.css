@@ -1,156 +1,108 @@
-/* Importar una fuente pixel art para el toque retro */
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+/* --- TEMAS CROMÁTICOS --- */
+.theme-1 { --pk: #DC0A2D; --bg: #3B4CCA; --ball: #FFDE00; --txt: #fff; }
+.theme-2 { --pk: #4A4A4A; --bg: #D4AF37; --ball: #1A1A1A; --txt: #fff; } /* Gris/Oro/Patrón Oscuro */
+.theme-3 { --pk: #002366; --bg: #800000; --ball: #00A86B; --txt: #fff; }
+.theme-4 { --pk: #B9F2FF; --bg: #000; --ball: #E5E4E2; --txt: #222; } /* Platino/Negro */
+.theme-5 { --pk: #111; --bg: #fff; --ball: #444; --txt: #fff; }
+.theme-all { --pk: #A78BFA; --bg: #F5F5DC; --ball: #301934; --txt: #fff; }
 
 :root {
-    --sinnoh-green: #9da38a;
-    --border-dark: #333;
-    --bg-light: #ccefff;
+    /* PATRÓN SEGÚN TU IMAGEN (Pokébola Pixel/Minimal) */
+    --pk-ball-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='currentColor' d='M50 0a50 50 0 0 0-50 50 50 50 0 0 0 50 50 50 50 0 0 0 50-50 50 50 0 0 0-50-50zm0 15a35 35 0 0 1 34.6 30h-21.4a13.5 13.5 0 0 0-26.4 0H15.4A35 35 0 0 1 50 15zm0 70a35 35 0 0 1-34.6-30h21.4a13.5 13.5 0 0 0 26.4 0h21.4A35 35 0 0 1 50 85z'/%3E%3Ccircle cx='50' cy='50' r='8' fill='currentColor'/%3E%3C/svg%3E");
 }
 
 body {
-    background-color: var(--bg-light);
-    font-family: 'VT323', monospace;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+    margin: 0; display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; font-family: 'Press Start 2P', cursive;
+    background-color: var(--bg); position: relative; overflow: hidden;
 }
 
-/* Marco exterior de la Pokedex */
-.pokedex-frame {
-    width: 350px;
-    background-color: var(--bg-light);
-    border: 6px solid #80dfff;
-    border-radius: 20px;
-    padding: 10px;
-    box-shadow: 0 10px 0 #66b3cc;
+/* PATRÓN DIAGONAL FORZADO */
+body::before {
+    content: ""; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+    background-image: var(--pk-ball-img);
+    background-size: 80px 80px;
+    background-repeat: repeat;
+    color: var(--ball);
+    opacity: 0.25;
+    transform: rotate(-15deg); /* Diagonal */
+    z-index: -1;
+    transition: color 0.4s;
 }
 
-/* Luces y Header */
-.pokedex-header {
-    text-align: center;
-    position: relative;
-    padding-bottom: 10px;
+.pokedex-case {
+    background-color: var(--pk); width: 440px; padding: 25px;
+    border-radius: 15px 15px 15px 70px; border: 8px solid #222;
+    box-shadow: 15px 15px 0px rgba(0,0,0,0.5); z-index: 10;
 }
 
-.sensor-blue {
-    width: 40px;
-    height: 40px;
-    background: radial-gradient(circle, #85c1e9, #3498db);
-    border: 4px solid white;
-    border-radius: 50%;
-    margin-bottom: 5px;
+.main-title {
+    font-size: 18px; text-align: center; color: var(--txt); margin: 10px 0;
 }
 
-.lights {
-    display: flex;
-    gap: 5px;
-    margin-left: 50px;
-    margin-top: -30px;
+/* CONTROLES */
+.controls-top { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+#play-btn {
+    width: 100%; background: #333; color: white; border: 4px solid #000;
+    padding: 15px; font-family: 'Press Start 2P', cursive; font-size: 10px; cursor: pointer;
 }
 
-.light {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid #333;
-}
-.red { background: #ff4d4d; }
-.yellow { background: #ffeb3b; }
-.green { background: #4caf50; }
-
-h1 {
-    font-size: 2rem;
-    margin-top: 10px;
-    letter-spacing: 2px;
+.retro-select {
+    width: 100%; background: #222; color: #fff; padding: 10px;
+    border: 3px solid #000; font-family: 'Press Start 2P', cursive; font-size: 10px;
 }
 
-/* Botones JUGAR / DEX */
-.pokedex-tabs {
+/* PANTALLA */
+.pokedex-screen {
+    background-color: #dedede; padding: 15px 15px 30px 15px;
+    border-radius: 10px; border: 5px solid #444; margin-bottom: 10px;
+}
+#main-screen, #gritodex-screen {
+    background-color: #98b088; border: 5px inset rgba(0,0,0,0.3);
+    min-height: 380px; padding: 10px;
+}
+
+.options-list { display: flex; flex-direction: column; gap: 8px; }
+.option-btn {
+    display: flex; align-items: center; background: rgba(255,255,255,0.3);
+    border: 2px solid transparent; padding: 6px; cursor: pointer;
+    font-family: 'Press Start 2P', cursive; font-size: 10px;
+}
+
+/* FEEDBACK COLORES */
+.correct-choice { background-color: #2ecc71 !important; color: white !important; border: 2px solid white !important; }
+.wrong-choice { background-color: #e74c3c !important; color: white !important; border: 2px solid white !important; }
+
+/* DEX - NEGRO PROFUNDO */
+#gritodex-screen { color: #000 !important; }
+.gritodex-item span { color: #000 !important; font-size: 8px; text-align: center; margin-top: 5px; }
+
+/* FOOTER - CRUZ A LA DERECHA */
+.pokedex-footer {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    align-items: flex-end;
+    margin-top: 20px;
 }
 
-.tab-btn {
-    width: 48%;
-    background: #444;
-    color: white;
-    border: none;
-    padding: 8px;
-    font-family: 'VT323';
-    font-size: 1.2rem;
-    cursor: pointer;
+.d-pad { 
+    width: 60px; height: 60px; background: #222; 
+    clip-path: polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%); 
 }
 
-.tab-btn.active {
-    background: #888;
-}
+.vent-lines { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+.vent-lines span { width: 45px; height: 6px; background: #222; border-radius: 2px; }
 
-/* --- LA PANTALLA (SINNOH STYLE) --- */
-.dex-screen {
-    background-color: var(--sinnoh-green);
-    /* El patrón blanco grisáceo que pediste */
-    background-image: radial-gradient(rgba(255, 255, 255, 0.25) 1.5px, transparent 1.5px);
-    background-size: 10px 10px;
-    
-    border: 5px solid #5a5e4d;
-    border-radius: 10px;
-    height: 500px;
-    padding: 15px;
-    overflow-y: scroll;
-}
+/* DECORACIÓN */
+.nav-tabs { display: flex; gap: 5px; margin-bottom: 15px; }
+.nav-tabs button { flex: 1; background: #222; color: #fff; border: 2px solid #fff; padding: 10px; font-family: 'Press Start 2P', cursive; font-size: 8px; cursor: pointer; }
+.nav-tabs button.active { background: #555; color: #f1c40f; }
 
-.counter {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #5a5e4d;
-}
+.hidden { display: none; }
+#feedback { text-align: center; color: white; margin-top: 10px; text-shadow: 1px 1px #000;}
+#next-btn { background: #fff; border: 2px solid #000; padding: 10px; font-family: 'Press Start 2P', cursive; cursor: pointer; width: 100%;}
 
-/* --- SOLUCIÓN AL PROBLEMA DE ALINEACIÓN --- */
-.dex-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.dex-item {
-    display: grid;
-    grid-template-columns: 80px 1fr; /* Columna fija para el sprite */
-    align-items: center;
-    background: rgba(0, 0, 0, 0.05); /* Sombra sutil para cada fila */
-    padding: 5px;
-    border-radius: 5px;
-}
-
-.sprite-box img {
-    width: 70px;
-    image-rendering: pixelated; /* Mantiene el estilo pixel art */
-}
-
-.info-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 10px;
-}
-
-.pk-number {
-    font-size: 0.9rem;
-    color: #444;
-}
-
-.pk-name {
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-/* Personalización del Scrollbar */
-.dex-screen::-webkit-scrollbar {
-    width: 10px;
-}
-.dex-screen::-webkit-scrollbar-thumb {
-    background: #5a5e4d;
-    border-radius: 5px;
-}
+.top-header { display: flex; gap: 15px; margin-bottom: 15px; }
+.blue-eye { width: 50px; height: 50px; background: #5dade2; border: 4px solid #fff; border-radius: 50%; }
+.dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid #222; }
+.red { background: #ff0000; } .yellow { background: #f1c40f; } .green { background: #2ecc71; }
