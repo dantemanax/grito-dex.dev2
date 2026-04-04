@@ -37,9 +37,11 @@ function saveToGritodex(pkmn) {
     }
 }
 
+// FIX: Renderizado optimizado para cuadrícula de 2 columnas
 function renderGritodex() {
     const dex = JSON.parse(localStorage.getItem('gritodex') || '[]');
     if(countLabel) countLabel.innerText = dex.length;
+    
     gritodexList.innerHTML = dex.map(p => `
         <div class="gritodex-item">
             <img src="${p.sprite}" alt="${p.name}">
@@ -63,7 +65,7 @@ async function startNewRound() {
     hasGuessed = false;
     feedback.classList.add('hidden');
     statusLight.classList.add('loading-light');
-    optionsContainer.innerHTML = '<p>CARGANDO...</p>';
+    optionsContainer.innerHTML = '<p style="font-size:10px">CARGANDO...</p>';
     applyTheme(genSelect.value);
 
     const { min, max } = GEN_RANGES[genSelect.value];
