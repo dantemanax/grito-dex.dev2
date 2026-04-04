@@ -37,11 +37,9 @@ function saveToGritodex(pkmn) {
     }
 }
 
-// FIX: Renderizado optimizado para cuadrícula de 2 columnas
 function renderGritodex() {
     const dex = JSON.parse(localStorage.getItem('gritodex') || '[]');
     if(countLabel) countLabel.innerText = dex.length;
-    
     gritodexList.innerHTML = dex.map(p => `
         <div class="gritodex-item">
             <img src="${p.sprite}" alt="${p.name}">
