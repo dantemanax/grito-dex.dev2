@@ -3,28 +3,38 @@
 .theme-2 { --pk: #4A4A4A; --bg: #D4AF37; --ball: #1A1A1A; --txt: #fff; }
 .theme-3 { --pk: #002366; --bg: #800000; --ball: #00A86B; --txt: #fff; }
 
-/* CORRECCIÓN: --ball ahora es blanco (#fff) para visibilidad en fondo negro */
-.theme-4 { --pk: #B9F2FF; --bg: #000; --ball: #fff; --txt: #fff; }
+/* TEMA 4 SINNOH CORREGIDO: Fondo visible y patrón blanco */
+.theme-4 { --pk: #B9F2FF; --bg: #222; --ball: #ffffff; --txt: #fff; }
 
 .theme-5 { --pk: #111; --bg: #fff; --ball: #444; --txt: #fff; }
 .theme-all { --pk: #A78BFA; --bg: #F5F5DC; --ball: #301934; --txt: #fff; }
 
 :root {
-    --pk-ball-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='currentColor' d='M50 0a50 50 0 0 0-50 50 50 50 0 0 0 50 50 50 50 0 0 0 50-50 50 50 0 0 0-50-50zm0 15a35 35 0 0 1 34.6 30h-21.4a13.5 13.5 0 0 0-26.4 0H15.4A35 35 0 0 1 50 15zm0 70a35 35 0 0 1-34.6-30h21.4a13.5 13.5 0 0 0 26.4 0h21.4A35 35 0 0 1 50 85z'/%3E%3Ccircle cx='50' cy='50' r='8' fill='currentColor'/%3E%3C/svg%3E");
+    /* SVG de Pokébola optimizado para máscara */
+    --mask-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50 0a50 50 0 0 0-50 50 50 50 0 0 0 50 50 50 50 0 0 0 50-50 50 50 0 0 0-50-50zm0 15a35 35 0 0 1 34.6 30H69.2a13.5 13.5 0 0 0-26.4 0H15.4A35 35 0 0 1 50 15zm0 70a35 35 0 0 1-34.6-30h21.4a13.5 13.5 0 0 0 26.4 0h21.4A35 35 0 0 1 50 85z'/%3E%3Ccircle cx='50' cy='50' r='8'/%3E%3C/svg%3E");
 }
 
 body {
     margin: 0; display: flex; justify-content: center; align-items: center;
     min-height: 100vh; font-family: 'Press Start 2P', cursive;
     background-color: var(--bg); position: relative; overflow: hidden;
+    transition: background-color 0.4s;
 }
 
+/* PATRÓN MEJORADO CON MÁSCARA */
 body::before {
     content: ""; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
-    background-image: var(--pk-ball-img);
-    background-size: 80px 80px; background-repeat: repeat;
-    color: var(--ball); opacity: 0.25; transform: rotate(-15deg); z-index: -1;
-    transition: color 0.4s; /* Para una transición suave al cambiar de tema */
+    /* El color de la Pokébola ahora es background-color */
+    background-color: var(--ball);
+    /* Usamos máscara para que el patrón sea nítido */
+    -webkit-mask-image: var(--mask-url);
+    mask-image: var(--mask-url);
+    -webkit-mask-size: 80px 80px;
+    mask-size: 80px 80px;
+    opacity: 0.2; /* Ajusta esto si quieres que se vea más o menos fuerte */
+    transform: rotate(-15deg);
+    z-index: -1;
+    transition: background-color 0.4s;
 }
 
 .pokedex-case {
@@ -33,20 +43,15 @@ body::before {
     box-shadow: 15px 15px 0px rgba(0,0,0,0.5); z-index: 10;
 }
 
-/* PANTALLAS */
+/* PANTALLAS CON SCROLL */
 .pokedex-screen {
     background-color: #dedede; padding: 15px;
     border-radius: 10px; border: 5px solid #444; margin-bottom: 10px;
 }
-
 #main-screen, #gritodex-screen {
     background-color: #98b088; border: 5px inset rgba(0,0,0,0.3);
     height: 380px; overflow-y: auto; padding: 10px;
 }
-
-/* Scrollbar estética */
-#main-screen::-webkit-scrollbar, #gritodex-screen::-webkit-scrollbar { width: 8px; }
-#main-screen::-webkit-scrollbar-thumb, #gritodex-screen::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
 
 /* JUGAR: 1 COLUMNA */
 .options-list { display: flex; flex-direction: column; gap: 8px; }
@@ -56,11 +61,10 @@ body::before {
     font-family: 'Press Start 2P', cursive; font-size: 9px;
 }
 
-/* FEEDBACK COLORES */
 .correct-choice { background-color: #2ecc71 !important; color: white !important; border: 3px solid #fff !important; }
 .wrong-choice { background-color: #e74c3c !important; color: white !important; border: 3px solid #fff !important; }
 
-/* DEX: 2 COLUMNAS */
+/* DEX: 2 COLUMNAS + BOTONES CUADRADOS */
 #gritodex-list {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
 }
@@ -72,7 +76,7 @@ body::before {
 .gritodex-item img { width: 75%; image-rendering: pixelated; }
 .gritodex-item span { color: #000; font-size: 7px; text-align: center; margin-top: 4px; line-height: 1.2; }
 
-/* FOOTER - CRUZ DERECHA */
+/* FOOTER - CRUZ A LA DERECHA */
 .pokedex-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
 .d-pad { 
     width: 65px; height: 65px; background: #222; 
@@ -81,14 +85,14 @@ body::before {
 .vent-lines { display: flex; flex-direction: column; gap: 6px; }
 .vent-lines span { width: 45px; height: 6px; background: #222; border-radius: 2px; }
 
-/* DECORACIÓN Y OTROS */
+/* DECORACIÓN GENERAL */
 .main-title { font-size: 18px; text-align: center; color: var(--txt); margin: 10px 0; }
 .nav-tabs { display: flex; gap: 5px; margin-bottom: 15px; }
 .nav-tabs button { flex: 1; background: #222; color: #fff; border: 2px solid #fff; padding: 10px; font-family: 'Press Start 2P', cursive; font-size: 8px; cursor: pointer; }
 .nav-tabs button.active { background: #555; color: #f1c40f; }
+.hidden { display: none; }
 .retro-select { width: 100%; background: #222; color: #fff; padding: 10px; border: 3px solid #000; font-family: 'Press Start 2P', cursive; font-size: 10px; }
 #play-btn { width: 100%; background: #333; color: white; border: 4px solid #000; padding: 15px; font-family: 'Press Start 2P', cursive; font-size: 10px; cursor: pointer; }
-.hidden { display: none; }
 #feedback { text-align: center; color: white; margin-top: 10px; text-shadow: 1px 1px #000;}
 #next-btn { background: #fff; border: 2px solid #000; padding: 10px; font-family: 'Press Start 2P', cursive; cursor: pointer; width: 100%;}
 .top-header { display: flex; gap: 15px; margin-bottom: 15px; }
