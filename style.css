@@ -2,7 +2,7 @@
 .theme-1 { --pk: #DC0A2D; --bg: #3B4CCA; --ball: #FFDE00; --txt: #fff; }
 .theme-2 { --pk: #4A4A4A; --bg: #D4AF37; --ball: #1A1A1A; --txt: #fff; }
 .theme-3 { --pk: #002366; --bg: #800000; --ball: #00A86B; --txt: #fff; }
-.theme-4 { --pk: #B9F2FF; --bg: #000; --ball: #E5E4E2; --txt: #222; }
+.theme-4 { --pk: #B9F2FF; --bg: #000; --ball: #fff; --txt: #fff; }
 .theme-5 { --pk: #111; --bg: #fff; --ball: #444; --txt: #fff; }
 .theme-all { --pk: #A78BFA; --bg: #F5F5DC; --ball: #301934; --txt: #fff; }
 
