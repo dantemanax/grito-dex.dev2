@@ -121,7 +121,6 @@ function handleGuess(id, btn) {
         saveToGritodex(currentTarget);
     } else {
         btn.classList.add('wrong-choice');
-        // Marcamos el botón correcto para que el usuario aprenda
         buttons.forEach(b => {
             if(parseInt(b.dataset.id) === currentTarget.id) b.classList.add('correct-choice');
         });
